@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Penguin's Music Hub</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #1a1a1a url('/Users/sean/Desktop/MyMusicHub/main-page-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            position: relative;
+            overflow-x: hidden;
+        }
+        /* Waveform-inspired overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            opacity: 0.3;
+            z-index: 0;
+            animation: waveform 10s infinite ease-in-out;
+        }
+        @keyframes waveform {
+            0% { transform: translateY(0); opacity: 0.3; }
+            50% { transform: translateY(10px); opacity: 0.5; }
+            100% { transform: translateY(0); opacity: 0.3; }
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        header {
+            background: linear-gradient(180deg, rgba(26, 26, 26, 0.8), rgba(0, 0, 0, 0.6));
+            text-align: center;
+            padding: 3em 1em;
+            position: relative;
+            z-index: 1;
+            animation: pulse 2s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+        }
+        header p {
+            font-size: 1.2em;
+            margin: 0.5em 0;
+        }
+        nav {
+            background: rgba(51, 51, 51, 0.9);
+            padding: 1em;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 1.5em;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s, text-shadow 0.3s;
+        }
+        nav a:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 8px rgba(255, 0, 255, 0.7);
+        }
+        main {
+            max-width: 900px;
+            margin: 2em auto;
+            padding: 1em;
+            background: linear-gradient(45deg, #0ff, #f0f, #0ff, #f0f);
+            background-size: 400%;
+            border-radius: 12px;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+            animation: gradientShift 8s infinite ease-in-out;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        section, .future-sales {
+            margin: 1em 0;
+            padding: 1em;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            border: 2px solid transparent;
+            animation: borderGlow 3s infinite alternate, fadeInUp 1s forwards;
+            animation-delay: calc(0.2s * var(--order));
+        }
+        @keyframes borderGlow {
+            0% { border-color: #0ff; box-shadow: 0 0 5px #0ff; }
+            100% { border-color: #f0f; box-shadow: 0 0 10px #f0f; }
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        section:nth-child(1) { --order: 1; }
+        section:nth-child(2) { --order: 2; }
+        section:nth-child(3) { --order: 3; }
+        .future-sales { --order: 4; }
+        .future-sales {
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.8), rgba(255, 0, 255, 0.8));
+            text-align: center;
+            animation: gradientPulse 5s infinite ease-in-out;
+        }
+        @keyframes gradientPulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+        footer {
+            background: rgba(26, 26, 26, 0.8);
+            color: white;
+            text-align: center;
+            padding: 1em;
+            width: 100%;
+            margin-top: 2em;
+            position: relative;
+            z-index: 1;
+        }
+        /* Dynamic button styling */
+        .dynamic-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 3;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #0ff, #f0f);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            animation: buttonPulse 2s infinite ease-in-out;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .dynamic-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.7), 0 0 15px rgba(255, 0, 255, 0.7);
+        }
+        @keyframes buttonPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @media (max-width: 600px) {
+            nav a {
+                display: block;
+                margin: 0.5em 0;
+            }
+            header h1 {
+                font-size: 2em;
+            }
+            main {
+                padding: 0.5em;
+            }
+            section, .future-sales {
+                padding: 0.8em;
+            }
+            .dynamic-button {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio id="background-music" autoplay loop aria-label="Background Music: Cherry Blossom Dreams">
+        <source src="/Users/sean/Desktop/Site Music/Cherry Blossom Dreams.wav" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+    <!-- Dynamic button for testing audio -->
+    <button class="dynamic-button" onclick="document.getElementById('background-music').play()">Unleash the Beat!</button>
+    <header>
+        <h1>Mr. Penguin's Music Hub</h1>
+        <p>Stream Mr. Penguin's original songs</p>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="band-music.html">Band Music</a>
+        <a href="solo-music.html">Solo Music</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <main>
+        <section id="home">
+            <h2>Welcome</h2>
+            <p>Discover Mr. Penguin's original music. Explore my band and solo tracks, and stay tuned for future purchase options.</p>
+        </section>
+        <section id="about">
+            <h2>About Mr. Penguin</h2>
+            <p>I'm Mr. Penguin, a musician creating original songs both solo and with my band. Check out my music!</p>
+        </section>
+        <section id="contact">
+            <h2>Contact Mr. Penguin</h2>
+            <p>Email: Seanmusicpenguin@gmail.com</p>
+            <p>Questions or collabs? Reach out to Mr. Penguin!</p>
+        </section>
+        <div class="future-sales">
+            <p>Interested in buying Mr. Penguin's music? Sales coming soon!</p>
+        </div>
+    </main>
+    <footer>
+        <p>© <span id="year"></span> Mr. Penguin's Music Hub. All rights reserved. Unauthorized reproduction is prohibited.</p>
+    </footer>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        // Attempt to play audio on page load
+        const audio = document.getElementById('background-music');
+        audio.play().catch(error => {
+            console.log('Autoplay blocked:', error);
+        });
+        // Play on first user interaction (click anywhere)
+        document.addEventListener('click', () => {
+            audio.play().catch(error => console.log('Autoplay blocked:', error));
+        }, { once: true });
+    </script>
+</body>
+</html>
